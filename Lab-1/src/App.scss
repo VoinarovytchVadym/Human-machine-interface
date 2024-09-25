@@ -1,0 +1,75 @@
+.Header {
+  margin: 0px;
+  padding: 0px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+
+  background-color: #37373d;
+
+  .HeaderTools {
+    div {
+      color: white;
+      font-size: x;
+      border: 1px solid white;
+      background-color: #6f6f7c;
+      border-radius: 4px;
+      padding: 0px 5px 0px 5px;
+      cursor: pointer;
+    }
+  }
+
+  .HeaderMenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .HeaderLogo {
+      width: 42px;
+      height: 42px;
+    }
+    .HeaderText {
+      margin-left: 10px;
+      font-size: 24px;
+      color: white;
+    }
+  }
+
+  .File-dropdown {
+    position: absolute;
+    z-index: 10;
+    left: 5px;
+    top: 40px;
+    margin: 0px;
+    padding: 0px;
+    width: 80px;
+    background-color: white;
+    border: 1px solid #eeeeee;
+    border-radius: 4px;
+    list-style-type: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    li {
+      cursor: pointer;
+      text-align: center;
+      padding: 5px 0px 5px 0px;
+      border-bottom: 1px solid #eeeeee;
+      border-radius: 4px;
+      font-size: 12px;
+      input {
+        display: none;
+      }
+      &:hover {
+        background-color: #fafafa;
+      }
+    }
+  }
+}
+.Editor {
+  display: flex;
+  background-color: white;
+  border: 1px solid black;
+  height: 80vh;
+  width: 80vw;
+  margin: 20px auto;
+  padding: 20px;
+}
