@@ -44,7 +44,6 @@ function Header() {
               style={{ display: "none" }} // Сховати файл
             />
           </li>
-          <li>Save file</li>
         </ul>
       )}
     </div>
