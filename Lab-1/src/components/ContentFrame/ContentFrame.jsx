@@ -1,4 +1,4 @@
-import { Editor } from "@tinymce/tinymce-react"; // Правильний імпорт
+import { Editor } from "@tinymce/tinymce-react";
 import React, { useRef } from "react";
 import { useFileContext } from "../FileContext/FileContext";
 
@@ -11,23 +11,33 @@ function ContentFrame() {
   };
 
   const addMarker = () => {
-    const editor = editorRef.current; // Отримуємо редактор
-    const selectedText = editor.selection.getContent(); // Отримуємо виділений текст
+    const editor = editorRef.current;
+    const selectedText = editor.selection.getContent();
     console.log("Selected Text:", selectedText);
     if (selectedText) {
-      // Вставляємо маркери в виділений текст
       editor.execCommand("mceInsertContent", false, "**" + selectedText + "**");
     } else {
       alert("Please select some text to mark.");
     }
   };
 
+  const addRightIndent = () => {
+    const editor = editorRef.current;
+    const selectedContent = editor.selection.getContent({ format: "html" });
+
+    if (selectedContent) {
+      const indentedContent = `<span style="margin-right: 20px;">${selectedContent}</span>`;
+      editor.execCommand("mceInsertContent", false, indentedContent);
+    } else {
+      alert("Please select some text to apply the indent.");
+    }
+  };
   return (
     <>
       <Editor
-        apiKey="6p54ybxz6l3iqrsejjth1pxa88pmxyymbf3ad5resggqz0yq" // Ваш API ключ
+        apiKey="6p54ybxz6l3iqrsejjth1pxa88pmxyymbf3ad5resggqz0yq"
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue={fileContent ? fileContent : "<p>Welcome to TinyMCE!</p>"} // Початковий текст
+        initialValue={fileContent ? fileContent : "<p>Welcome to TinyMCE!</p>"}
         init={{
           selector: "textarea",
           plugins: [
@@ -70,13 +80,19 @@ function ContentFrame() {
             "markdown",
           ],
           toolbar:
-            "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | addmarker",
+            "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | addmarker addrightindent",
           setup: (editor) => {
             editor.ui.registry.addButton("addmarker", {
               text: "Control",
               onAction: () => {
-                // Викликаємо функцію для додавання маркера
                 addMarker();
+              },
+            });
+
+            editor.ui.registry.addButton("addrightindent", {
+              text: "Right Indent",
+              onAction: () => {
+                addRightIndent();
               },
             });
           },
